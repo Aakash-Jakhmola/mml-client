@@ -1,0 +1,58 @@
+.box4 {
+    display: flex;
+    flex-wrap: wrap;
+    margin:0 auto ;
+}
+
+.item {
+    flex: 1 0 30%;
+    margin:0 auto;
+    width: fit-content;
+    
+}
+
+.list-header {
+    width : 80%;
+    display:flex ;
+    font-size: 30px;
+    margin: auto;
+    color : white; 
+    background-color: black;
+}
+
+.list-header > div {
+    display: flex;
+    width : 20%;
+    justify-content: center;
+    border : 1px solid gray;
+}
+
+.list-item {
+    width : 80%;
+    display:flex ;
+    margin: auto;
+}
+
+.list-item > div {
+    display: flex;
+    width : 20%;
+    justify-content: center;
+    border : 1px solid gray;
+    border-top:none;
+    border-left : none ;
+    
+}
+
+.fit-text {
+    width:100%;
+    text-align: center;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+
+.list-item >div:nth-of-type(5) {
+    border-right : none;
+}
+

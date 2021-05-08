@@ -1,0 +1,49 @@
+.box {
+  border: 2px solid whitesmoke;
+  width: 50%;
+  margin: auto;
+}
+#box1 {
+  border: 2px solid whitesmoke;
+  display: flex;
+  justify-content: space-evenly;
+  padding-left: 10px;
+}
+
+.Avatar {
+  margin-top: 10px;
+}
+
+#box1 > button {
+  margin: auto 0;
+  height: fit-content;
+  border: 2px solid #00bfff;
+  background-color: white;
+  color: #00bfff;
+  border-radius: 10px;
+}
+
+.box > div {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#follow,
+#unfollow {
+  width: 50%;
+  color: gray;
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 20px;
+}
+
+.highlighted {
+  border-bottom: 2px solid aqua;
+  color: aqua;
+}
+
+.Avatar {
+  marign-right: auto;
+  margin-left: 0;
+  background-color: red;
+}

@@ -1,0 +1,18 @@
+.headerItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+  cursor: pointer;
+  margin-left: 10px;
+  color: gray;
+}
+
+.headerItem:hover {
+  color: black;
+}
+
+.headerItemHeading {
+  margin: 0px;
+  font-size: 14px;
+}
