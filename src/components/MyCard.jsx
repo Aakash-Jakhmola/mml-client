@@ -4,6 +4,7 @@ import Collapse from 'react-bootstrap/Collapse'
 import Form from 'react-bootstrap/Form'
 import { useFormFields } from "../lib/hooksLib";
 import checkAuth from '../lib/checkAuth'
+import base_url from '../keys'
 import axios from 'axios'
 
 // adult: false
@@ -48,7 +49,7 @@ const RatingAndReview = (props) => {
 		console.log(typeof(newMovie.movieid))
 		console.log(typeof(newMovie.rating))
 		console.log(typeof(newMovie.review))
-		axios.post("http://localhost:8000/users/addmovie", newMovie)
+		axios.post(base_url + "users/addmovie", newMovie)
 		.then( (res) => {console.log("successfully added") } , (err) => alert("Some error occured"))
 		.catch((err) => console.log(err))
 

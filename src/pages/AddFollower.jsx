@@ -10,6 +10,7 @@ import Col from 'react-bootstrap/Col'
 import MyCard from '../components/MyCard'
 import base_url from '../keys'
 import Card from 'react-bootstrap/Card'
+import { AlbumTwoTone } from '@material-ui/icons';
 
 
 export default () => {
@@ -21,18 +22,24 @@ export default () => {
   });
   const history = useHistory();
 
+
+  const [show , setShow] = React.useState(false) ;
   const [user, setUser] = React.useState([]);
 
 
   const addFollow = () => {
-    const uname = ""
+    let uname = ""
     if(user) 
       uname = user.username 
     const userid = checkAuth("user_id")
     const url = base_url + "users/follow"
     axios.post(url,{userid : userid, username : uname}).then(
       (res) => {
-        
+        if(res.data.error)
+          alert(res.data.error);
+        else 
+          alert("Added successfully !")
+        console.log(res);
       }, (err) => console.log(err)
     )
 
@@ -41,13 +48,19 @@ export default () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(fields.userName)
+    
     const fetchURL = base_url + "users/" + fields.userName;
     axios.get(fetchURL).then(
       (res) => {
         console.log(res.data);
-        if (res.data.length > 0)
+        if (res.data.length > 0) {
           setUser(res.data[0]);
+          setShow(true)
+        } else {
+          alert("No users found") ;
+        }
       }, (err) => {
+        alert("Some error occured ! Try after some time")
         console.log(err);
       }
     )
@@ -74,7 +87,7 @@ export default () => {
         Search
 		</Button>
     </Form>
-    <div>
+    {show && <div>
       <Card>
         <Card.Header>@{user.username}</Card.Header>
         <Card.Body>
@@ -91,7 +104,7 @@ export default () => {
           <Button variant="primary" onClick={addFollow}>Follow</Button>
         </Card.Body>
       </Card>
-    </div>
+    </div>}
   </div>
   );
 }

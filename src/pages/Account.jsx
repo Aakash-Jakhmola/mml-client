@@ -43,7 +43,7 @@ export default () => {
   return <div>
     <div style={{ display: "flex", justifyContent: "space-evenly" }}>
       <div>
-        <h1>{user ? user.firstname + user.lastname : ""} </h1>
+        <h1>{user ? user.firstname + " " + user.lastname : ""} </h1>
         <h5>@{user ? user.username : ""}</h5>
       </div>
       <div style={{ marginLeft: "auto", display: "flex", flexDirection: "column", alignItems: "center" }}>
