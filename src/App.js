@@ -52,6 +52,7 @@ export default function App() {
           <Nav>
             {!isLogged && <Nav.Link href="/signup">Signup</Nav.Link>}
             {!isLogged && <Nav.Link href="/login">Login</Nav.Link> }
+            {isLogged && <Nav.Link href="/addfollower">Find Friend</Nav.Link>}
             {isLogged && <Nav.Link href="/addmovie">Add Movie</Nav.Link>}
             {isLogged &&<Nav.Link onClick={handleLogout}>Logout</Nav.Link>}
             

@@ -10,17 +10,24 @@ export default () => {
   const { username } = useParams()
   const [movieList, setMovieList] = React.useState([]);
 
-  const user = {
+  const inituser = {
     username : username,
-    firstname : "sumit",
-    lastname : "Singh",
-    movies_count : 4,
-    followers_count: 7,
-    following_count:9
+    firstname : "firstname",
+    lastname : "lastname",
+    movies_count : 0,
+    followers_count: 0,
+    following_count:0
   }
 
+  const [user, setUser] = React.useState(inituser)
 
   React.useEffect(() => {
+    let url1 = base_url + "users/" + username
+		axios.get(url1). then((res) => {
+			console.log(res) ;
+			setUser(res.data[0]);
+	 	}, (err) => console.log(err))
+
     let url = base_url + "users/" + username + "/movielist";
     
     axios.get(url).then((res) => {

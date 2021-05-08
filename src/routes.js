@@ -8,6 +8,7 @@ import Home from './pages/Home'
 import Followers from './pages/Followers'
 import Following from './pages/Following'
 import Account from './pages/Account'
+import AddFollower from './pages/AddFollower'
 
 
 export default function Routes() {
@@ -31,9 +32,13 @@ export default function Routes() {
             <Route path="/signup">
                 <Signup />
             </Route>
+            <Route path="/addfollower">
+                <AddFollower />
+            </Route>
             <Route path="/:username">
                 <Account />
             </Route>
+            
             <Route>
                 <NotFound />
             </Route>

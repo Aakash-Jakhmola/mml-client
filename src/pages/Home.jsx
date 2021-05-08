@@ -8,34 +8,44 @@ import axios from 'axios'
 import MyCard from '../components/MyCard'
 import {useSelector} from 'react-redux'
 import base_url from '../keys'
+import { SettingsInputSvideoRounded } from '@material-ui/icons';
 
 export default () => {
 
 	const [movieList, setMovieList] = React.useState([]);
-	
+	const [user, setUser] = React.useState({}) ;
 	const history = useHistory();
 	
+	const username = checkAuth("username");
 	if (checkAuth("user_id")) {
-		console.log("d");
-	} else {
+		history.push(username);
+	} else 
 		history.push("/login");
-	}
-
-	const user = useSelector(state => state.userReducer.user)
 	
 
 
-	React.useEffect(() => {
-		let url = base_url + "users/" + checkAuth("username") + "/movielist";
+
+	// React.useEffect(()=>{
+	// 	let url = base_url + "users/" + checkAuth("username")
+	// 	axios.get(url). then((res) => {
+	// 		console.log(res) ;
+	// 		setUser(res.data);
+	// 	}, (err) => console.log(err))
+	// },[])
+
+
+
+	// React.useEffect(() => {
+	// 	let url = base_url + "users/" + checkAuth("username") + "/movielist";
 		
-		console.log(user)
-		axios.get(url).then((res) => {
-			setMovieList(res.data);
-			console.log(res);
-		}, (err) => {
-			console.log(err);
-		})
-	}, [user])
+	// 	console.log(user)
+	// 	axios.get(url).then((res) => {
+	// 		setMovieList(res.data[0]);
+	// 		console.log(res);
+	// 	}, (err) => {
+	// 		console.log(err);
+	// 	})
+	// }, [])
 
 
 
