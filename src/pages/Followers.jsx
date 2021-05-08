@@ -2,14 +2,14 @@ import React from 'react';
 import axios from 'axios'
 import { Redirect, useParams, Link } from 'react-router-dom';
 import Table from 'react-bootstrap/Table'
-
+import base_url from '../keys'
 export default () => {
   const { username } = useParams()
   const [list, setList] = React.useState([]);
 
   React.useEffect(() => {
     console.log(typeof (username))
-    let url = "http://localhost:8000/users/" + username + "/followers"
+    let url = base_url + "users/" + username + "/followers"
     axios.get(url)
       .then((res) => {
         console.log(res)

@@ -8,7 +8,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { FetchUser } from '../redux/actions'
 import checkauth from "../lib/checkAuth";
-
+import base_url from '../keys'
 export default  function Login() {
 
 
@@ -36,7 +36,7 @@ export default  function Login() {
 			password: fields.password,
 		};
 
-		axios.post('http://localhost:8000/users/login', newUser)
+		axios.post(base_url + 'users/login', newUser)
 			.then((response) => {
 				console.log(response);
 				if (response.status === 200) {

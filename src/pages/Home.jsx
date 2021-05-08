@@ -7,6 +7,7 @@ import checkAuth from '../lib/checkAuth'
 import axios from 'axios'
 import MyCard from '../components/MyCard'
 import {useSelector} from 'react-redux'
+import base_url from '../keys'
 
 export default () => {
 
@@ -25,7 +26,7 @@ export default () => {
 
 
 	React.useEffect(() => {
-		let url = "http://localhost:8000/users/" + checkAuth("username") + "/movielist";
+		let url = base_url + "users/" + checkAuth("username") + "/movielist";
 		
 		console.log(user)
 		axios.get(url).then((res) => {

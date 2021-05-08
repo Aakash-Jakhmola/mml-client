@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import MyCard from '../components/MyCard'
 import { useParams, useHistory } from 'react-router-dom'
-
+import base_url from '../keys'
 
 export default () => {
   const { username } = useParams()
@@ -21,7 +21,7 @@ export default () => {
 
 
   React.useEffect(() => {
-    let url = "http://localhost:8000/users/" + username + "/movielist";
+    let url = base_url + "users/" + username + "/movielist";
     
     axios.get(url).then((res) => {
       setMovieList(res.data);

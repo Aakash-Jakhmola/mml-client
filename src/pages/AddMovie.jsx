@@ -8,7 +8,8 @@ import checkAuth from '../lib/checkAuth';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import MyCard from '../components/MyCard'
-const url = 'http://localhost:8000/movies/search/'
+import base_url from '../keys'
+
 
 export default () => {
 
@@ -32,7 +33,7 @@ export default () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log(fields.movieName)
-		const fetchURL = url + fields.movieName;
+		const fetchURL = base_url + "movies/search/" + fields.movieName;
 		axios.get(fetchURL).then(
 			(res) => {
 				console.log(res.data);

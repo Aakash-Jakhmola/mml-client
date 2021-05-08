@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { useFormFields } from "../lib/hooksLib";
 import Button from "react-bootstrap/Button";
 import axios from 'axios';
+import base_url from '../keys'
 
 const initialState = {
 	username: "",
@@ -34,7 +35,7 @@ export default function Signup() {
 			firstname: fields.firstname,
 			lastname: fields.lastname
 		};
-		axios.post('http://localhost:8000/users/register', newUser).then((response) => {
+		axios.post(base_url + 'users/register', newUser).then((response) => {
 			console.log(response);
 			if (response.status === 200) {
 				console.log("suceess");

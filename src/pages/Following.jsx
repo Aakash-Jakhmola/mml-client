@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios'
 import { useParams } from 'react-router-dom';
 import Table from 'react-bootstrap/Table'
+import base_url from '../keys'
 
 export default () => {
   const { username } = useParams()
@@ -9,7 +10,7 @@ export default () => {
 
   React.useEffect(() => {
     console.log(typeof (username))
-    let url = "http://localhost:8000/users/" + username + "/following"
+    let url = base_url + "users/" + username + "/following"
     axios.get(url)
       .then((res) => {
         console.log(res)
