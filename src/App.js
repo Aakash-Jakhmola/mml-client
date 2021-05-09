@@ -1,13 +1,9 @@
 import "./styles.css";
-import React, { useEffect } from "react";
+import React from "react";
 import Routes from "./routes";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import {useHistory} from 'react-router-dom' ;
-import {useSelector} from 'react-redux' ;
-import {useDispatch} from 'react-redux' ;
-import axios from 'axios' ;
-import { FetchUser, LogoutUser } from "./redux/actions";
 import checkAuth from "./lib/checkAuth";
 
 
@@ -15,13 +11,9 @@ export default function App() {
 
   const [isLogged, setLogged] = React.useState(false) ;
   
-
   const history = useHistory() ;
-  const dispatch = useDispatch() ;
-  const user = useSelector(state => state.userReducer.user) ;
-  
-  
-  useEffect( () => {
+
+  React.useEffect( () => {
     if(checkAuth("user_id")) {
       setLogged(true) ;
     }
@@ -30,14 +22,12 @@ export default function App() {
     }
     console.log("hojo")
   
-  },[user])
+  },[])
  
   const handleLogout = () => {
     setLogged(false) ;
-    
     document.cookie = "user_id="  
     document.cookie = "username=" 
-    dispatch(LogoutUser())
     history.push("/login") ;
   }
   
@@ -55,7 +45,6 @@ export default function App() {
             {isLogged && <Nav.Link href="/addfollower">Find Friend</Nav.Link>}
             {isLogged && <Nav.Link href="/addmovie">Add Movie</Nav.Link>}
             {isLogged &&<Nav.Link onClick={handleLogout}>Logout</Nav.Link>}
-            
           </Nav>
         </Navbar.Collapse>
       </Navbar>

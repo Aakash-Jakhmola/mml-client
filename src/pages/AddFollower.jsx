@@ -1,21 +1,26 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button'
 import { useFormFields } from "../lib/hooksLib";
 import axios from 'axios';
 import { useHistory } from 'react-router-dom'
 import checkAuth from '../lib/checkAuth';
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import MyCard from '../components/MyCard'
 import base_url from '../keys'
 import Card from 'react-bootstrap/Card'
-import { AlbumTwoTone } from '@material-ui/icons';
+
 
 
 export default () => {
 
-
+  React.useEffect( () => {
+		let user_id  = checkAuth("user_id")
+		if (user_id) {
+			console.log("inside" ,user_id);
+			
+		} else {
+			history.push("/login");
+		}
+	},[])
 
   const [fields, handleFieldChange] = useFormFields({
     userName: "",

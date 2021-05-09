@@ -1,26 +1,12 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
-import Collapse from 'react-bootstrap/Collapse'
+import Spinner from 'react-bootstrap/Spinner'
 import Form from 'react-bootstrap/Form'
 import { useFormFields } from "../lib/hooksLib";
 import checkAuth from '../lib/checkAuth'
 import base_url from '../keys'
 import axios from 'axios'
 
-// adult: false
-// backdrop_path: null
-// genre_ids: [27]
-// id: 291545
-// original_language: "en"
-// original_title: "Parasite"
-// review: "An abandoned oil rig in the middle of the North Sea. Dr. Christine Hansen is charged with the task of testing an experimental cleaning fluid which could revolutionize the oil industry. Hired to carry out the tests is Jacob Rasmussen and his rough and ready crew of deconstruction engineers. But within hours one of them is missing under suspicious circumstances. Things go from bad to worse when environmental activist Mickey Hennessey and his hard-bitten associates seize control of the rig, taking everybody on board hostage. But very soon oil workers and environmentalists will be compelled to join forces in an evolutionary battle for survival. For a savage new life-form has made its home on the rig. And it is hungry."
-// popularity: 10.074
-// poster_path: "/lDsUWvTHbSsI62u63S8B6Jjgztb.jpg"
-// release_date: "2004-01-01"
-// title: "Parasite"
-// video: false
-// vote_average: 5.6
-// vote_count: 12
 
 const mess = ["Read More", "Show less"];
 
@@ -35,10 +21,11 @@ const RatingAndReview = (props) => {
 		review: ""
 	})
 
+	const [isLoading, setLoading] = React.useState(false) ;
 
 	const addMovie = () => {
 		// call the api 
-
+		setLoading(true) ;
 		const newMovie = {
 			userid: checkAuth('user_id'),
 			movieid: parseInt(props.movieId),
@@ -50,7 +37,14 @@ const RatingAndReview = (props) => {
 		console.log(typeof(newMovie.rating))
 		console.log(typeof(newMovie.review))
 		axios.post(base_url + "users/addmovie", newMovie)
-		.then( (res) => {console.log("successfully added") } , (err) => alert("Some error occured"))
+		.then( (res) => {
+			setLoading(false) ;
+			if(res.data.error)
+				alert(res.data.error) ;
+			else 
+				alert("Successfully added") ;
+			
+		 } , (err) => alert("Some error occured try after some time"))
 		.catch((err) => console.log(err))
 
 
@@ -61,7 +55,7 @@ const RatingAndReview = (props) => {
 	return <Form>
 		<Form.Group controlId="rating">
 			<Form.Label>Your rating</Form.Label>
-			<Form.Control as="select" onChange={setFields} value={fields.rating}>
+			<Form.Control size ="sm" as="select" onChange={setFields} value={fields.rating}>
 				{array.map((i) =>
 					<option>{i}</option>
 				)}
@@ -72,6 +66,7 @@ const RatingAndReview = (props) => {
 			<Form.Control as="textarea" rows={2} onChange={setFields} value={fields.review} />
 		</Form.Group>
 		<Card.Link onClick={addMovie}>Add to list</Card.Link>
+		{isLoading && <Spinner animation="border"/>}
 	</Form>;
 
 }
@@ -99,8 +94,8 @@ export default (props) => {
 	const [open, setOpen] = React.useState(1);
 	
 
-	return <Card bg="dark" text="light" style={{ width: '18rem', marginTop: '1rem' }}>
-		<Card.Img variant="top" src={imgurl} style={{ height: "150px", objectFit: "cover" }} />
+	return <Card style={{ width: '18rem', marginTop: '1rem' }}>
+		<Card.Img variant="top" src={imgurl} style={{ height: "12rem", objectFit: "cover" }} />
 		<Card.Body>
 			<Card.Title>{props.movie.title} ({props.movie.release_date})</Card.Title>
 			<Card.Subtitle className="mb-2 text-muted">{genres}</Card.Subtitle>

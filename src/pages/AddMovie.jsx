@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button'
+import Spinner from 'react-bootstrap/Spinner'
 import { useFormFields } from "../lib/hooksLib";
 import axios from 'axios';
 import { useHistory } from 'react-router-dom'
@@ -19,6 +20,7 @@ export default () => {
 	const history = useHistory();
 
 	const [movieList, setMovieList] = React.useState([]);
+	const [isLoading, setIsLoading] = React.useState(false) ;
 	useEffect( () => {
 		let user_id  = checkAuth("user_id")
 		if (user_id) {
@@ -33,12 +35,13 @@ export default () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log(fields.movieName)
+		setIsLoading(true) ;
 		const fetchURL = base_url + "movies/search/" + fields.movieName;
 		axios.get(fetchURL).then(
 			(res) => {
-				console.log(res.data);
+				console.log(res);
 				setMovieList(res.data);
-
+				setIsLoading(false) ;
 			}, (err) => {
 				console.log(err);
 			}
@@ -65,6 +68,7 @@ export default () => {
 			<Button type="submit" disabled={!validateForm()}>
 				Search
 		</Button>
+		{isLoading && <Spinner animation="border" />}
 		</Form>
 		<div>
 			<Row >

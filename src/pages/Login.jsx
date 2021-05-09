@@ -5,8 +5,6 @@ import { useHistory } from "react-router-dom";
 import { useFormFields } from "../lib/hooksLib";
 import "../css/Login.css";
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { FetchUser } from '../redux/actions'
 import checkauth from "../lib/checkAuth";
 import base_url from '../keys'
 export default  function Login() {
@@ -41,7 +39,7 @@ export default  function Login() {
 				console.log(response);
 				if (response.status === 200) {
 					console.log(response.data);
-					dispatch(FetchUser(response.data));
+				
 					document.cookie = "user_id=" + response.data.userid 
 					document.cookie = "username=" + fields.username ;
 					history.push("/");
