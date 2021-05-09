@@ -7,19 +7,16 @@ import "../css/Login.css";
 import axios from 'axios';
 import checkauth from "../lib/checkAuth";
 import base_url from '../keys'
+
+
 export default  function Login() {
 
-
 	const history = useHistory();
-	const dispatch = useDispatch();
 	const [fields, handleFieldChange] = useFormFields({
 		username: "",
 		password: ""
 	});
-
-
 	
-
 	function validateForm() {
 		return fields.username.length > 0 && fields.password.length > 0;
 	}
@@ -38,12 +35,10 @@ export default  function Login() {
 			.then((response) => {
 				console.log(response);
 				if (response.status === 200) {
-					console.log(response.data);
-				
+					console.log(response.data);	
 					document.cookie = "user_id=" + response.data.userid 
 					document.cookie = "username=" + fields.username ;
-					history.push("/");
-					
+					history.push("/");	
 				} else {
 					alert(response.data);
 					console.log("failure");
