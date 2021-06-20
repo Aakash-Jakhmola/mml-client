@@ -72,24 +72,32 @@ const RatingAndReview = (props) => {
 }
 
 export default (props) => {
-	const imgurl =  props.movie.poster_url;
+
+	if(!props.movie) {
+		return (<div>Nothing to Show</div>)
+	}
+
+	const imgurl = props.movie.poster_url;
 	let size = "" 
 	let firsttext = ""
 	let rempart = ""
 	let genres = ""
 
-	props.movie.genres.map((g,i) => {
-		if(i)
-			genres += ", " + g 
-		else 
-			genres += g
-		}
-	)
+	if(props.movie && props.movie.genres) {
+		props.movie.genres.map((g,i) => {
+			if(i)
+				genres += ", " + g 
+			else 
+				genres += g
+			}
+		)
+	}
 	
-	size = props.movie.overview.length;
-	firsttext = props.movie.overview.substr(0, Math.min(limit, size));
+	let overview =  props.movie?props.movie.overview:''
+	size = overview.length
+	firsttext = overview.substr(0, Math.min(limit, size));
 	if (size > limit)
-		rempart = props.movie.overview.substr(limit, size - limit + 1);
+		rempart = overview.substr(limit, size - limit + 1);
 
 	const [open, setOpen] = React.useState(1);
 	

@@ -1,3 +1,15 @@
+.Login {
+  width: 100%;
+}
+
+.Login span {
+  width: 100%;
+  margin-top: 1rem;
+  color: red;
+  text-align: center;
+  display: inline-block;
+}
+
 @media all and (min-width: 480px) {
     .Login {
       padding: 60px 0;

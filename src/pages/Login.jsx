@@ -12,6 +12,7 @@ import base_url from '../keys'
 export default  function Login() {
 
 	const history = useHistory();
+	const [loginError, setLoginError] = useState('')
 	const [fields, handleFieldChange] = useFormFields({
 		username: "",
 		password: ""
@@ -33,16 +34,16 @@ export default  function Login() {
 
 		axios.post(base_url + 'users/login', newUser)
 			.then((response) => {
-				console.log(response);
-				if (response.status === 200) {
-					console.log(response.data);	
+				if (!response.data.error) {
+					console.log('OK',response.data)
 					document.cookie = "user_id=" + response.data.userid 
 					document.cookie = "username=" + fields.username ;
 					history.push("/");	
 				} else {
-					alert(response.data);
-					console.log("failure");
-					history.push("/login");
+					//alert(response.data);
+					setLoginError(response.data.error)
+					console.log('error',response.data);	
+					//history.push("/login");
 				}
 			}, (error) => alert("Some error occured. " + error))
 		console.log('what is happening')
@@ -72,6 +73,7 @@ export default  function Login() {
 					Login
 				</Button>
 			</Form>
+			<span>{loginError}</span>
 		</div>
 	);
 
