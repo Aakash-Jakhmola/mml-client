@@ -4,6 +4,33 @@ body {
   padding: 0;
 }
 
+.page-container {
+  margin-left: auto;
+  width:fit-content;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  margin-top: 2rem;
+}
+
+.page-container > input {
+  width: 30px;
+  height: 30px;
+  padding : 0;
+  border-radius: 5px;
+  border : 1px solid #eee;
+  text-align: center;
+  outline: none;
+}
+
+.arrow-btn {
+  width:30px;
+  height :30px;
+  border:none;
+  border-radius: 5px;
+  color:white;
+  background-color: #00bfff;
+}
+
 .bodyarea {
   min-width: 100%;
   min-height: 100vh;
@@ -22,6 +49,19 @@ input[type=file] {
 
 .NotFound {
   padding-top: 100px;
+}
+
+.orderby-btn{
+  color: white;
+  width: 5rem;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  float: right;
+}
+.orderby-btn:focus {
+  outline: none;
+  border: none;
 }
 
 @media all and (min-width: 480px) {

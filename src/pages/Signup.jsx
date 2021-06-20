@@ -37,15 +37,13 @@ export default function Signup() {
 		};
 		axios.post(base_url + 'users/register', newUser).then((response) => {
 			console.log(response);
-			if (response.status === 200) {
-				console.log("suceess");
+			if (parseInt(response.status/100) === 2) {
 				history.push("/login");
 			} else {
 				let message = "Some error occured. Try after some time!";
 				if (response.status === 401)
 					message = "User with the email already exists";
 				alert(message);
-				console.log("failure");
 				history.push("/signup");
 			}
 		}, (error) => console.log(error));
