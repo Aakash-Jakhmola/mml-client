@@ -6,6 +6,8 @@ import MyCard from '../components/MyCard'
 import { useParams, useHistory } from 'react-router-dom'
 import base_url from '../keys'
 
+import '../css/Card.css'
+
 export default () => {
   const { username } = useParams()
   const [movieList, setMovieList] = React.useState([]);
@@ -104,13 +106,12 @@ export default () => {
      style={{backgroundColor:`${orderBy==='Time'?'#00bfff':'#0186b3'}`}}>{orderBy}</button>
     </div>
 
-    <Row >
+    <div className='card-wrapper'>
       {movieList && movieList.length > 0 && movieList.map((movie) =>
-        <Col xs={12} md={4}>
-          <MyCard movie={movie.movie} show={false} review={movie.review} rating={movie.rating} />
-        </Col>
+        <MyCard movie={movie.movie} show={false} review={movie.review} rating={movie.rating} />
       )}
-    </Row>
+    </div>
+   
     {totalPages > 0 && <div className="page-container">
       <button className="arrow-btn" disabled={curPageNumber === 1} onClick={decrement}><i class="fas fa-angle-left"></i></button>
       {" Page "}

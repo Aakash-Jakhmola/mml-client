@@ -71,13 +71,10 @@ export default () => {
 		{isLoading && <Spinner animation="border" />}
 		</Form>
 		<div>
-			<Row >
 				{movieList && movieList.length> 0 && movieList.map((movie) => 
-					<Col xs={6} md={4}>
-						<MyCard movie={movie} show ={true}/>
-					 </Col>
+						<MyCard movie={movie} show ={true} fromSearch={true}/>
+					
 				)}
-			</Row>
 		</div>
 	</div>
 	);

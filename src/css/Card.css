@@ -1,0 +1,156 @@
+.card-wrapper {
+  height: fit-content;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: auto;
+  justify-content: space-between;
+}
+
+.card {
+  margin: 10px;
+  min-height: fit-content; 
+  width: 48%;
+  margin-top: 1.7rem;
+  display: inline-block;
+  border: none;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;;
+  transition: box-shadow 0.2s ease-in-out;
+  overflow: hidden;
+  /* overflow-x: auto; */
+}
+
+.card:hover {
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
+.main {
+  height: fit-content;
+  width: fit-content;
+  display: flex;
+}
+
+.poster-container {
+  width: fit-content;
+  height: fit-content;
+  margin-bottom: 0;
+}
+
+.poster-container img{
+  width: 150px;
+}
+
+.movie-content {
+  width: 100%;
+  height: 225px;
+  padding: 0rem 1rem;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.movie-title {
+  font-size: xx-large;
+  font-weight: 650;
+}
+
+.movie-info {
+  margin-top: 0.3rem;
+}
+.movie-info span{
+  font-size: medium;
+  color:  grey;
+  font-weight: 500;
+  padding: 0.1rem 0.4rem;
+  padding-left: 0;
+  margin-top: 10rem;
+}
+
+.genres {
+  margin-top: .5rem;
+}
+.genres span {
+  font-size: small;
+  border: 1px solid rgb(116, 116, 116);
+  border-radius: 20px;
+  padding: 0 0.5rem;
+  margin-right: 0.7rem;
+}
+
+.overview {
+  overflow-x: hidden;
+  overflow: hidden;
+  margin-top: 1rem;
+  font-size: smaller;
+  position: relative;
+}
+
+.movie-content::-webkit-scrollbar {
+  width: 5px;               /* width of the entire scrollbar */
+}
+
+.movie-content::-webkit-scrollbar-track {
+  background: transparent;        /* color of the tracking area */
+}
+
+.movie-content::-webkit-scrollbar-thumb {
+  background-color: transparent;    /* color of the scroll thumb */
+  border-radius: 5px;       /* roundness of the scroll thumb */  /* creates padding around scroll thumb */
+}
+
+.movie-content:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(146, 146, 146,0.5);    /* color of the scroll thumb */
+  border-radius: 5px;       /* roundness of the scroll thumb */  /* creates padding around scroll thumb */
+}
+
+
+.rating-review {
+ display: block;
+ min-height: fit-content;
+ background-color: white;
+ width: 100%;
+ margin:0;
+ padding: 0.5rem 1rem;
+ overflow: auto;
+ font-family: 'PT Sans Narrow', sans-serif;
+ font-size: 15px;
+ display: flex;
+}
+
+.review {
+  display: inline-block;
+  flex: 1;
+}
+
+.rating {
+  width: 100px;
+  float: right;
+  text-align: center;
+  font-weight: 600;
+  font-size: 25px;
+}
+
+.form-wrapper {
+ margin: 1rem 2rem;
+}
+
+
+@media screen and (max-width: 1200px) {
+  .card {
+    width: 46%;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  .card {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .main {
+    display: block;
+  }
+  .poster-container img {
+    width: 100%;
+  }
+}

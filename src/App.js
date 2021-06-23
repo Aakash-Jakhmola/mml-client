@@ -32,7 +32,7 @@ export default function App() {
   }
   
   return (
-    <div className="App container py-3">
+    <div className="App container-fluid">
       <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
         <Navbar.Brand href="/" className="font-weight-bold text-muted">
           My Movie List
