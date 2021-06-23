@@ -1,6 +1,12 @@
 html,
 body {
-  margin: 0;
+  margin: 0 3%;
+  padding: 0;
+}
+
+
+
+.App {
   padding: 0;
 }
 

@@ -6,7 +6,7 @@ import { useFormFields } from "../lib/hooksLib";
 import checkAuth from '../lib/checkAuth'
 import base_url from '../keys'
 import axios from 'axios'
-
+import "../css/Card.css"
 
 const mess = ["Read More", "Show less"];
 
@@ -22,6 +22,12 @@ const RatingAndReview = (props) => {
 	})
 
 	const [isLoading, setLoading] = React.useState(false) ;
+
+	// React.useEffect(()=>{
+	// 	if(!isLoading){
+	// 		setFields({rating:1,review:''})
+	// 	}
+	// },[isLoading])
 
 	const addMovie = () => {
 		// call the api 
@@ -100,23 +106,35 @@ export default (props) => {
 		rempart = overview.substr(limit, size - limit + 1);
 
 	const [open, setOpen] = React.useState(1);
+	// console.log(props)
 	
 
-	return <Card style={{ width: '18rem', marginTop: '1rem' }}>
-		<Card.Img variant="top" src={imgurl} style={{ height: "12rem", objectFit: "cover" }} />
-		<Card.Body>
-			<Card.Title>{props.movie.title} ({props.movie.release_date})</Card.Title>
-			<Card.Subtitle className="mb-2 text-muted">{genres}</Card.Subtitle>
-			<Card.Subtitle className="mb-2 text-muted">{props.movie.language}</Card.Subtitle>
-			<Card.Text>
-				{firsttext + (open ? "" : rempart)}
-				<Card.Link onClick={() => setOpen(1 - open)} >{mess[1 - open]}</Card.Link>
-
-			</Card.Text>
-			
-			{props.show && <RatingAndReview movieId={props.movie.id} />}
-			{!props.show && <Card.Text>Your Score : {props.rating}</Card.Text>}
-			{!props.show && <Card.Text>Your Review : {props.review}</Card.Text>}
-		</Card.Body>
-	</Card>;
+	return (
+		<div className='card'>
+			<div className='main'>
+				<div className='poster-container'>
+					<img src={imgurl}/>
+				</div>
+				<div className='movie-content'>
+					<span className='movie-title'>{props.movie.title}</span>
+					<div className='movie-info'>
+						<span>{props.movie.release_date.substring(0,4)} </span>
+						{props.movie.runtime &&	<span>{parseInt(props.movie.runtime/60)}h {props.movie.runtime%60}m </span>}
+					</div>
+					<div className='genres'>
+					{	props.movie.genres.map((g,id)=>id<=2&&(
+						<span>{g}</span>
+					))}
+					</div>
+					<div className='overview'>{props.movie.overview}</div>		
+				</div>
+			</div>
+			<hr style={{borderTop:'2px solid', borderColor:'#f0f0f0', marginTop:'2px',marginBottom:'0px'}}></hr>
+			{!props.fromSearch && <div className='rating-review'>
+				<div className='review'>{props.review}</div>
+				<div className='rating'><span style={{fontWeight:'400',fontSize:'15px'}}>Score: </span>{props.rating}</div>
+			</div>}
+			{props.fromSearch && <div className='form-wrapper'><RatingAndReview movieId={props.movie.id} /></div>}
+		</div>
+	)
 }
