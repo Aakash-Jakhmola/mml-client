@@ -58,12 +58,9 @@ export default () => {
     axios.get(fetchURL).then(
       (res) => {
         console.log(res.data);
-        if (res.data.length > 0) {
-          setUser(res.data[0]);
-          setShow(true)
-        } else {
-          alert("No users found") ;
-        }
+        setUser(res.data);
+        setShow(true)
+        
       }, (err) => {
         alert("Some error occured ! Try after some time")
         console.log(err);

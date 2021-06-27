@@ -17,7 +17,7 @@
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;;
   transition: box-shadow 0.2s ease-in-out;
   overflow: hidden;
-  /* overflow-x: auto; */
+  position: relative;
 }
 
 .card:hover {
@@ -106,7 +106,6 @@
 .rating-review {
  display: block;
  min-height: fit-content;
- background-color: white;
  width: 100%;
  margin:0;
  padding: 0.5rem 1rem;
@@ -133,6 +132,33 @@
  margin: 1rem 2rem;
 }
 
+.icon i {
+  margin: 1rem 1rem 0 0;
+  cursor: pointer;
+}
+
+.icon {
+  float: right;
+  visibility: hidden;
+  font-size: large;
+  height: fit-content;
+}
+
+.card:hover .icon {
+  visibility: visible;
+}
+
+/* .icon:hover {
+  background-color:rgb(194, 194, 194);
+}
+.icon:hover  ~ .main,
+.icon:hover  ~ .rating-review {
+  background-color: rgb(194, 194, 194);
+  -webkit-transition: background-color 100ms linear;
+  -ms-transition: background-color 100ms linear;
+  transition: background-color 300ms linear;
+} */
+
 
 @media screen and (max-width: 1200px) {
   .card {
@@ -144,13 +170,30 @@
   .card {
     width: 100%;
   }
+  .movie-content {
+    height: fit-content;
+  }
 }
 
-@media screen and (max-width: 450px) {
+
+@media screen and (max-width: 500px) {
   .main {
     display: block;
   }
+  .poster-container {
+    width: 100%;
+  }
+  .movie-content {    
+    display: block;
+    word-wrap: break-word;
+    box-sizing: border-box;
+    overflow:auto;
+  }
   .poster-container img {
     width: 100%;
+    margin: 0 auto;
+  }
+  .movie-content {
+    margin-top: 1rem;;
   }
 }

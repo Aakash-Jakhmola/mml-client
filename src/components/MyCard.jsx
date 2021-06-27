@@ -2,17 +2,17 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Spinner from 'react-bootstrap/Spinner'
 import Form from 'react-bootstrap/Form'
+import axios from 'axios'
 import { useFormFields } from "../lib/hooksLib";
+import { ToastContainer, toast } from 'react-toastify';
+import {useSelector} from 'react-redux'
+import 'react-toastify/dist/ReactToastify.css';
 import checkAuth from '../lib/checkAuth'
 import base_url from '../keys'
-import axios from 'axios'
 import "../css/Card.css"
+import Modal from './Modal'
 
-const mess = ["Read More", "Show less"];
-
-const limit = 70;
 const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
 
 const RatingAndReview = (props) => {
 
@@ -22,15 +22,40 @@ const RatingAndReview = (props) => {
 	})
 
 	const [isLoading, setLoading] = React.useState(false) ;
+	const [added, setAdded] = React.useState(false)
 
-	// React.useEffect(()=>{
-	// 	if(!isLoading){
-	// 		setFields({rating:1,review:''})
-	// 	}
-	// },[isLoading])
+	const sucessToast = () => toast.success('Movie Added ', {
+		position: "bottom-right",
+		autoClose: 3000,
+		hideProgressBar: false,
+		closeOnClick: true,
+		pauseOnHover: true,
+		draggable: true,
+		progress: undefined,
+		});
+
+		const warningToast = (warning) => toast.warn(warning, {
+			position: "bottom-right",
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			});
+
+	const errorToast = () => toast.error('Something bad happened\n try after sometime', {
+			position: "bottom-right",
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			});
+
 
 	const addMovie = () => {
-		// call the api 
 		setLoading(true) ;
 		const newMovie = {
 			userid: checkAuth('user_id'),
@@ -38,28 +63,29 @@ const RatingAndReview = (props) => {
 			rating: fields.rating,
 			review: fields.review
 		}
-		console.log(newMovie)
-		console.log(typeof(newMovie.movieid))
-		console.log(typeof(newMovie.rating))
-		console.log(typeof(newMovie.review))
 		axios.post(base_url + "users/addmovie", newMovie)
 		.then( (res) => {
+			console.log(res)
 			setLoading(false) ;
-			if(res.data.error)
-				alert(res.data.error) ;
-			else 
-				alert("Successfully added") ;
-			
-		 } , (err) => alert("Some error occured try after some time"))
+			if(res.data.error) {
+				warningToast(res.data.error)
+			}
+			else {
+				setAdded(true)
+				sucessToast()
+			}
+		 } , (err) => {
+			setLoading(false) 
+			errorToast(err);
+			console.log(err)
+		 })
 		.catch((err) => console.log(err))
-
-
-		console.log(fields.rating);
-		console.log(fields.review);
 	}
 
-	return <Form>
-		<Form.Group controlId="rating">
+	return (
+		<div>
+			<Form>
+			<Form.Group controlId="rating">
 			<Form.Label>Your rating</Form.Label>
 			<Form.Control size ="sm" as="select" onChange={setFields} value={fields.rating}>
 				{array.map((i) =>
@@ -73,52 +99,56 @@ const RatingAndReview = (props) => {
 		</Form.Group>
 		<Card.Link onClick={addMovie}>Add to list</Card.Link>
 		{isLoading && <Spinner animation="border"/>}
-	</Form>;
+		</Form>
+		<ToastContainer />		
+		</div>
+	)
 
 }
 
 export default (props) => {
 
+	const user = checkAuth('username')
+	const [isEditing, setIsEditing] = React.useState(false)
+	
+	async function update() {
+		setIsEditing((prev)=>!prev)
+	}
+
+	async function deleteMovie() {
+		const deleteUrl = `${base_url}users/${user}/movielist?movieid=${props.movie.id}`
+		axios.delete(deleteUrl)
+		.then((response)=>{
+			console.log(response)
+			props.getMovieList()
+			setIsEditing(false)
+		})
+		.catch((err)=>{
+			console.log(err)
+		})
+	}
+
+
 	if(!props.movie) {
 		return (<div>Nothing to Show</div>)
 	}
-
-	const imgurl = props.movie.poster_url;
-	let size = "" 
-	let firsttext = ""
-	let rempart = ""
-	let genres = ""
-
-	if(props.movie && props.movie.genres) {
-		props.movie.genres.map((g,i) => {
-			if(i)
-				genres += ", " + g 
-			else 
-				genres += g
-			}
-		)
-	}
-	
-	let overview =  props.movie?props.movie.overview:''
-	size = overview.length
-	firsttext = overview.substr(0, Math.min(limit, size));
-	if (size > limit)
-		rempart = overview.substr(limit, size - limit + 1);
-
-	const [open, setOpen] = React.useState(1);
-	// console.log(props)
-	
 
 	return (
 		<div className='card'>
 			<div className='main'>
 				<div className='poster-container'>
-					<img src={imgurl}/>
+					<img src={props.movie.poster_url}/>
 				</div>
 				<div className='movie-content'>
+				{!props.fromSearch && user === props.user &&  
+					<div className='icon'>
+						<i className="far fa-edit" onClick={update}/>
+						<i className="far fa-trash-alt" onClick={deleteMovie}/>
+					</div>}
+
 					<span className='movie-title'>{props.movie.title}</span>
 					<div className='movie-info'>
-						<span>{props.movie.release_date.substring(0,4)} </span>
+						{props.movie.release_date && <span>{props.movie.release_date.substring(0,4)} </span>}
 						{props.movie.runtime &&	<span>{parseInt(props.movie.runtime/60)}h {props.movie.runtime%60}m </span>}
 					</div>
 					<div className='genres'>
@@ -134,6 +164,7 @@ export default (props) => {
 				<div className='review'>{props.review}</div>
 				<div className='rating'><span style={{fontWeight:'400',fontSize:'15px'}}>Score: </span>{props.rating}</div>
 			</div>}
+			{isEditing && <Modal update={update} rating={props.rating} review={props.review} user = {user} movie={props.movie}/>}
 			{props.fromSearch && <div className='form-wrapper'><RatingAndReview movieId={props.movie.id} /></div>}
 		</div>
 	)
