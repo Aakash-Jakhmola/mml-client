@@ -1,0 +1,31 @@
+.overlay {
+  position: fixed; /* Positioning and size */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  background-color: rgba(128,128,128,0.5); /* color */
+}
+
+.modal {
+  position: fixed; /* positioning in center of page */
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%,-50%);
+  height: fit-content;
+  width: 40%;
+  display: block;
+  background-color: white; /* background color */
+}
+
+@media screen and (max-width: 720px) {
+  .modal {
+    width: 60%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .modal {
+    width: 80%;
+  }
+}

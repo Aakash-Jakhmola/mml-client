@@ -1,7 +1,64 @@
-:root {
+/* :root {
     --color-background-primary : #0d1117 ;
     --color-oragne : #f9826c;
+} */
+
+.profile-wrapper {
+    justify-content: space-evenly;
 }
+.stats {
+    display: flex;
+    flex-wrap: wrap;
+    height: fit-content;
+    justify-content: space-evenly;
+}
+
+.stats a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.info{
+    /* background-color: rebeccapurple; */
+    height: fit-content;
+    width: 10%;
+    min-width: fit-content;
+    cursor: pointer;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.info i {
+    margin-top: 0.5rem;
+    margin-right: 0.5rem;
+    font-size: x-large;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    text-align: center;
+    /* line-height: 50px; */
+    vertical-align: middle;
+    padding: 12px 10px 10px 10px;
+}
+
+
+
+.info-text {
+    margin: 0;
+}
+.info-text span{
+    font-size: xx-large;
+    margin: 0;
+    font-weight: 650;
+}
+.info-text span:nth-child(2) {
+    color: grey;
+    display: block;
+    font-size: smaller;
+    font-weight: 500;
+    letter-spacing: 0.1rem;
+}
+
 
  .f-f-box, .info-box {
     display : flex ;
@@ -36,3 +93,10 @@
     margin:auto auto;
     color : "red";
 }
+
+@media screen and (max-width: 420px) {
+    .info {
+      width: 100%;
+      text-align: center;
+    }
+  }

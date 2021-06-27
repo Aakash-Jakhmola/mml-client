@@ -20,7 +20,6 @@ export default function App() {
     else {
       setLogged(false) ;
     }
-    console.log("hojo")
   
   },[])
  
@@ -33,7 +32,7 @@ export default function App() {
   
   return (
     <div className="App container-fluid">
-      <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
+      <Navbar collapseOnSelect bg="light" expand="md" className="mb-3" sticky='top' >
         <Navbar.Brand href="/" className="font-weight-bold text-muted">
           My Movie List
         </Navbar.Brand>
