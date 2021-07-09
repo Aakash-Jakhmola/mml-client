@@ -32,7 +32,7 @@ export default  function Login() {
 			password: fields.password,
 		};
 
-		axios.post(base_url + 'users/login', newUser)
+		axios.post(base_url + 'users/login', newUser,{withCredentials:true})
 			.then((response) => {
 				if (!response.data.error) {
 					console.log('OK',response.data)

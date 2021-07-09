@@ -44,7 +44,8 @@ const RatingAndReview = (props) => {
 			progress: undefined,
 			});
 
-	const errorToast = () => toast.error('Something bad happened\n try after sometime', {
+	function errorToast() {
+		return toast.error('Something bad happened\n try after sometime', {
 			position: "bottom-right",
 			autoClose: 3000,
 			hideProgressBar: false,
@@ -53,6 +54,7 @@ const RatingAndReview = (props) => {
 			draggable: true,
 			progress: undefined,
 			});
+	}
 
 
 	const addMovie = () => {
@@ -63,12 +65,13 @@ const RatingAndReview = (props) => {
 			rating: fields.rating,
 			review: fields.review
 		}
+		console.log(newMovie)
 		axios.post(base_url + "users/addmovie", newMovie)
 		.then( (res) => {
 			console.log(res)
 			setLoading(false) ;
 			if(res.data.error) {
-				warningToast(res.data.error)
+				//warningToast(res.data.error)
 			}
 			else {
 				setAdded(true)
