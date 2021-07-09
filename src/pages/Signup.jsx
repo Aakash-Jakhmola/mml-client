@@ -5,6 +5,7 @@ import { useFormFields } from "../lib/hooksLib";
 import Button from "react-bootstrap/Button";
 import axios from 'axios';
 import base_url from '../keys'
+import { ToastContainer, toast } from 'react-toastify';
 
 const initialState = {
 	username: "",
@@ -17,6 +18,18 @@ const initialState = {
 export default function Signup() {
 	const [fields, handleFieldChange] = useFormFields(initialState);
 	const history = useHistory();
+
+	function successToast() {
+		return toast.success('Account Created ', {
+			position: "bottom-right",
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			});
+	}
 
 	function validateForm() {
 		return (
@@ -38,6 +51,7 @@ export default function Signup() {
 		axios.post(base_url + 'users/register', newUser).then((response) => {
 			console.log(response);
 			if (parseInt(response.status/100) === 2) {
+				successToast()
 				history.push("/login");
 			} else {
 				let message = "Some error occured. Try after some time!";
@@ -50,7 +64,6 @@ export default function Signup() {
 
 
 	}
-
 
 
 	function renderForm() {
