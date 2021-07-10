@@ -1,3 +1,3 @@
-const base_url = "https://fast-falls-96051.herokuapp.com/"
+const base_url = "http://localhost:8000/"
 
 export default base_url
