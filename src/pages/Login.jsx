@@ -36,6 +36,8 @@ export default  function Login() {
 			.then((response) => {
 				if (!response.data.error) {
 					console.log('OK',response.data)
+					document.cookie = "user_id=" + response.data._id 
+					document.cookie = "username=" + response.data.username ;
 					history.push("/");	
 				} else {
 					//alert(response.data);
