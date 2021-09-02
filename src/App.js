@@ -5,7 +5,10 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import {useHistory} from 'react-router-dom' ;
 import checkAuth from "./lib/checkAuth";
+import base_url from './keys'
+import axios from 'axios';
 
+axios.defaults.withCredentials = true
 
 export default function App() {
 
@@ -13,20 +16,35 @@ export default function App() {
   
   const history = useHistory() ;
 
-  React.useEffect( () => {
-    if(checkAuth("user_id")) {
-      setLogged(true) ;
-    }
-    else {
-      setLogged(false) ;
-    }
+  React.useEffect(()=>{
+		axios.get(base_url+'users/isAuthenticated')
+		.then((res)=>{
+			console.log(res)
+			if(res.data.error) {
+        setLogged(false) ;
+				history.push("/login");
+			}else 
+        setLogged(true) ;
+		})
+		.catch((err)=>{
+			console.log(err)
+			history.push("/login");
+		})
+	},[])
+
+  // React.useEffect( () => {
+  //   if(checkAuth("user_id")) {
+  //     setLogged(true) ;
+  //   }
+  //   else {
+  //     setLogged(false) ;
+  //   }
   
-  },[])
+  // },[])
  
   const handleLogout = () => {
     setLogged(false) ;
-    document.cookie = "user_id="  
-    document.cookie = "username=" 
+    axios.post(base_url + 'users/logout',{},{withCredentials:true})
     history.push("/login") ;
   }
   
