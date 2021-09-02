@@ -11,6 +11,8 @@ import Col from 'react-bootstrap/Col'
 import MyCard from '../components/MyCard'
 import base_url from '../keys'
 
+axios.defaults.withCredentials = true
+
 
 export default () => {
 

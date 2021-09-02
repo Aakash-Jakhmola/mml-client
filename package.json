@@ -22,7 +22,7 @@
     "react-scripts": "4.0.0",
     "react-switch": "^6.0.0",
     "react-toastify": "^7.0.4",
-    "redux": "^4.0.5",
+    "redux": "^4.1.1",
     "redux-devtools-extension": "^2.13.9",
     "save-dev": "0.0.1-security",
     "uuid": "^8.3.2"

@@ -8,6 +8,7 @@ import checkAuth from '../lib/checkAuth';
 import base_url from '../keys'
 import Card from 'react-bootstrap/Card'
 
+axios.defaults.withCredentials = true
 
 
 export default () => {

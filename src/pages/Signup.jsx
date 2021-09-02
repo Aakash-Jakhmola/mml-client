@@ -7,6 +7,8 @@ import axios from 'axios';
 import base_url from '../keys'
 import { ToastContainer, toast } from 'react-toastify';
 
+axios.defaults.withCredentials = true
+
 const initialState = {
 	username: "",
 	password: "",

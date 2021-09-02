@@ -8,6 +8,7 @@ import axios from 'axios';
 import checkauth from "../lib/checkAuth";
 import base_url from '../keys'
 
+axios.defaults.withCredentials = true
 
 export default  function Login() {
 
@@ -25,14 +26,12 @@ export default  function Login() {
 	function handleSubmit(event) {
 		event.preventDefault();
 
-		console.log("subited")
-
 		const newUser = {
 			username: fields.username,
 			password: fields.password,
 		};
 
-		axios.post(base_url + 'users/login', newUser,{withCredentials:true})
+		axios.post(base_url + 'users/login', newUser)
 			.then((response) => {
 				if (!response.data.error) {
 					console.log('OK',response.data)

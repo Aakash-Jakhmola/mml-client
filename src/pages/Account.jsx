@@ -6,6 +6,8 @@ import base_url from '../keys'
 import '../css/AccountStyles.css'
 import '../css/Card.css'
 
+axios.defaults.withCredentials = true
+
 export default () => {
   const { username } = useParams()
   const [movieList, setMovieList] = React.useState([]);
